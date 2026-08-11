@@ -1,0 +1,288 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+ <title>Notícias — MDC</title>
+
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+ <link
+ href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+ rel="stylesheet"
+ >
+
+ <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="news-page">
+
+ <header id="header" class="scrolled">
+ <div class="nav-wrap">
+
+ <a href="index.html" class="brand">
+ <span class="logo">MDC</span>
+
+ <span class="brand-text">
+ <strong>Movimento Democrático Central</strong>
+ <small>MDC</small>
+ </span>
+ </a>
+
+ <nav class="desktop-nav">
+ <a href="index.html#home">Início</a>
+ <a href="index.html#quem-somos">Quem Somos</a>
+ <a href="index.html#prioridades">Prioridades</a>
+ <a href="index.html#metas">Metas</a>
+ <a href="index.html#propostas">Propostas</a>
+ <a href="noticias.html">Notícias</a>
+ <a href="index.html#contato">Contato</a>
+ </nav>
+
+ <a class="header-btn" href="index.html#quem-somos">
+ Conheça o MDC →
+ </a>
+
+ <button class="hamburger" id="menuBtn">
+ ☰
+ </button>
+
+ </div>
+ </header>
+
+ <main
+ class="section light-bg"
+ style="padding-top: 150px; min-height: 100vh"
+ >
+
+ <div class="container">
+
+ <div class="eyebrow">
+ MDC / NOTÍCIAS
+ </div>
+
+ <h1
+ style="
+ font-size: 60px;
+ line-height: 1;
+ letter-spacing: -.05em;
+ margin: 0;
+ "
+ >
+ Últimas Notícias
+ </h1>
+
+ <p class="lead dark-lead">
+ Notícias fictícias e demonstrativas do universo do
+ Movimento Democrático Central.
+ </p>
+
+ <div
+ style="
+ margin-top: 40px;
+ display: flex;
+ gap: 12px;
+ flex-wrap: wrap;
+ "
+ >
+
+ <input
+ id="search"
+ placeholder="Pesquisar notícias..."
+ style="
+ padding: 14px 18px;
+ border: 1px solid #ddd;
+ border-radius: 14px;
+ flex: 1;
+ min-width: 220px;
+ "
+ >
+
+ <select
+ id="category"
+ style="
+ padding: 14px;
+ border: 1px solid #ddd;
+ border-radius: 14px;
+ "
+ >
+ <option>Todas</option>
+ <option>Educação</option>
+ <option>Trabalho</option>
+ <option>Saúde</option>
+ <option>Tecnologia</option>
+ <option>Sustentabilidade</option>
+ </select>
+
+ </div>
+
+ <div
+ id="newsGrid"
+ class="cards"
+ style="grid-template-columns: repeat(3, 1fr)"
+ ></div>
+
+ </div>
+
+ </main>
+
+ <footer>
+ <div class="copyright">
+ © 2026 Movimento Democrático Central. Todos os direitos reservados.
+ </div>
+ </footer>
+
+ <script>
+ const data = [
+ [
+ 1,
+ 'Educação',
+ 'MDC apresenta plano para ampliar formação técnica e tecnológica',
+ 'O partido apresentou uma proposta voltada à expansão do ensino técnico, da formação profissional e do acesso dos estudantes às novas tecnologias.',
+ '08 de agosto de 2026',
+ 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=85'
+ ],
+
+ [
+ 2,
+ 'Trabalho',
+ 'MDC debate medidas para estimular emprego e empreendedorismo',
+ 'A proposta reúne iniciativas para reduzir burocracias, facilitar o acesso ao crédito e incentivar pequenos negócios.',
+ '06 de agosto de 2026',
+ 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=85'
+ ],
+
+ [
+ 3,
+ 'Saúde',
+ 'MDC propõe novas estratégias para reduzir filas na saúde pública',
+ 'O plano destaca prevenção, tecnologia, integração de informações e melhoria da gestão dos serviços públicos.',
+ '04 de agosto de 2026',
+ 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=85'
+ ],
+
+ [
+ 4,
+ 'Tecnologia',
+ 'MDC defende maior investimento em ciência, pesquisa e inovação',
+ 'A proposta busca aproximar universidades, centros de pesquisa, empresas e poder público.',
+ '02 de agosto de 2026',
+ 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=85'
+ ],
+
+ [
+ 5,
+ 'Sustentabilidade',
+ 'MDC apresenta agenda de sustentabilidade para o desenvolvimento brasileiro',
+ 'A agenda reúne propostas relacionadas à reciclagem, energias renováveis, preservação ambiental e desenvolvimento sustentável.',
+ '30 de julho de 2026',
+ 'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=900&q=85'
+ ]
+ ];
+
+ function render() {
+ const query = document
+ .getElementById('search')
+ .value
+ .toLowerCase();
+
+ const category = document.getElementById('category').value;
+
+ const filteredNews = data.filter(news => {
+ const matchesCategory =
+ category === 'Todas' || news[1] === category;
+
+ const matchesSearch =
+ (news[2] + ' ' + news[3])
+ .toLowerCase()
+ .includes(query);
+
+ return matchesCategory && matchesSearch;
+ });
+
+ document.getElementById('newsGrid').innerHTML =
+ filteredNews
+ .map(news => `
+ <article
+ style="
+ background: #fff;
+ border: 1px solid #e4e4e7;
+ border-radius: 24px;
+ overflow: hidden;
+ "
+ >
+
+ <img
+ src="${news[5]}"
+ style="
+ height: 210px;
+ width: 100%;
+ object-fit: cover;
+ "
+ >
+
+ <div style="padding: 24px">
+
+ <small
+ style="
+ color: #6D28D9;
+ font-weight: 900;
+ letter-spacing: .15em;
+ "
+ >
+ ${news[1].toUpperCase()}
+ </small>
+
+ <h2 style="font-size: 21px">
+ ${news[2]}
+ </h2>
+
+ <p style="font-size: 14px">
+ ${news[3]}
+ </p>
+
+ <small>
+ ${news[4]}
+ </small>
+
+ <br>
+
+ <a
+ style="
+ display: inline-block;
+ margin-top: 12px;
+ color: #6D28D9;
+ font-weight: 800;
+ "
+ href="noticia.html?id=${news[0]}"
+ >
+ Leia mais ↗
+ </a>
+
+ </div>
+
+ </article>
+ `)
+ .join('') ||
+ '<p>Nenhuma notícia encontrada.</p>';
+ }
+
+ document
+ .getElementById('search')
+ .oninput = render;
+
+ document
+ .getElementById('category')
+ .onchange = render;
+
+ render();
+ </script>
+
+</body>
+
+</html>
+```
