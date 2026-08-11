@@ -1,0 +1,225 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+ <title>Notícia — MDC</title>
+
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+ <link
+ href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+ rel="stylesheet"
+ >
+
+ <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+ <header id="header" class="scrolled">
+ <div class="nav-wrap">
+
+ <a href="index.html" class="brand">
+ <span class="logo">MDC</span>
+
+ <span class="brand-text">
+ <strong>Movimento Democrático Central</strong>
+ <small>MDC</small>
+ </span>
+ </a>
+
+ <nav class="desktop-nav">
+ <a href="index.html">Início</a>
+ <a href="noticias.html">Notícias</a>
+ <a href="index.html#contato">Contato</a>
+ </nav>
+
+ <a class="header-btn" href="index.html#quem-somos">
+ Conheça o MDC →
+ </a>
+
+ </div>
+ </header>
+
+ <main class="section" style="padding-top: 150px">
+
+ <article class="container" style="max-width: 1000px">
+
+ <a
+ href="noticias.html"
+ style="font-weight: 800; color: #71717a"
+ >
+ ← Todas as notícias
+ </a>
+
+ <div id="article"></div>
+
+ </article>
+
+ </main>
+
+ <footer>
+ <div class="copyright">
+ © 2026 Movimento Democrático Central. Todos os direitos reservados.
+ </div>
+ </footer>
+
+ <script>
+ const data = [
+ [
+ 1,
+ 'Educação',
+ 'MDC apresenta plano para ampliar formação técnica e tecnológica',
+ '08 de agosto de 2026',
+ './imagem/pablo.png',
+ [
+ 'O partido apresentou uma proposta voltada à expansão do ensino técnico, da formação profissional e do acesso dos estudantes às novas tecnologias.',
+ 'A agenda defende a aproximação entre escolas, universidades, centros de pesquisa e o setor produtivo, com foco em oportunidades de formação e inovação.',
+ 'A proposta também destaca a importância de ampliar o acesso a ferramentas digitais e fortalecer ambientes de aprendizagem conectados às transformações do mercado de trabalho.'
+ ]
+ ],
+
+ [
+ 2,
+ 'Trabalho',
+ 'MDC debate medidas para estimular emprego e empreendedorismo',
+ '06 de agosto de 2026',
+ 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1600&q=85',
+ [
+ 'A proposta reúne iniciativas para reduzir burocracias, facilitar o acesso ao crédito e incentivar pequenos negócios.',
+ 'O MDC defende medidas que favoreçam a abertura e a continuidade de empreendimentos, especialmente para quem está começando.',
+ 'O objetivo é estimular a geração de renda e criar um ambiente mais favorável à inovação e à atividade produtiva.'
+ ]
+ ],
+
+ [
+ 3,
+ 'Saúde',
+ 'MDC propõe novas estratégias para reduzir filas na saúde pública',
+ '04 de agosto de 2026',
+ 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=85',
+ [
+ 'O plano destaca prevenção, tecnologia, integração de informações e melhoria da gestão dos serviços públicos.',
+ 'Entre as diretrizes está o uso responsável de tecnologia para melhorar fluxos, facilitar o acesso a informações e apoiar a gestão.',
+ 'A proposta também reforça a prevenção e a organização dos serviços como caminhos para melhorar o atendimento.'
+ ]
+ ],
+
+ [
+ 4,
+ 'Tecnologia',
+ 'MDC defende maior investimento em ciência, pesquisa e inovação',
+ '02 de agosto de 2026',
+ 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=85',
+ [
+ 'A proposta busca aproximar universidades, centros de pesquisa, empresas e poder público.',
+ 'O MDC considera ciência, pesquisa e inovação instrumentos importantes para o desenvolvimento de soluções e para a competitividade brasileira.',
+ 'A agenda propõe fortalecer conexões entre conhecimento, tecnologia e necessidades da sociedade.'
+ ]
+ ],
+
+ [
+ 5,
+ 'Sustentabilidade',
+ 'MDC apresenta agenda de sustentabilidade para o desenvolvimento brasileiro',
+ '30 de julho de 2026',
+ 'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1600&q=85',
+ [
+ 'A agenda reúne propostas relacionadas à reciclagem, energias renováveis, preservação ambiental e desenvolvimento sustentável.',
+ 'A visão do MDC combina desenvolvimento e responsabilidade ambiental, buscando incentivar práticas sustentáveis e inovação.',
+ 'A proposta também destaca educação ambiental, preservação e uso responsável dos recursos naturais.'
+ ]
+ ]
+ ];
+
+ const id = Number(
+ new URLSearchParams(location.search).get('id') || 1
+ );
+
+ const n = data.find(x => x[0] === id) || data[0];
+
+ document.getElementById('article').innerHTML = `
+ <div
+ class="eyebrow"
+ style="margin-top: 45px"
+ >
+ ${n[1]}
+ </div>
+
+ <h1
+ style="
+ font-size: clamp(42px, 6vw, 72px);
+ line-height: .98;
+ letter-spacing: -.05em;
+ margin: 10px 0;
+ "
+ >
+ ${n[2]}
+ </h1>
+
+ <p style="color: #71717a">
+ ${n[3]}
+ </p>
+
+ <img
+ src="${n[4]}"
+ style="
+ width: 100%;
+ height: 500px;
+ object-fit: cover;
+ border-radius: 30px;
+ margin: 35px 0;
+ "
+ >
+
+ <div
+ style="
+ max-width: 750px;
+ margin: auto;
+ "
+ >
+ ${n[5]
+ .map(
+ p => `
+ <p
+ style="
+ font-size: 19px;
+ line-height: 1.8;
+ color: #3f3f46;
+ "
+ >
+ ${p}
+ </p>
+ `
+ )
+ .join('')
+ }
+
+ <button
+ class="btn primary"
+ onclick="
+ navigator.share
+ ? navigator.share({
+ title: n[2],
+ text: n[2]
+ })
+ : alert(
+ 'Link copiado/compartilhamento disponível no navegador.'
+ )
+ "
+ >
+ ↗ Compartilhar
+ </button>
+ </div>
+ `;
+ </script>
+
+</body>
+
+</html>
+```
